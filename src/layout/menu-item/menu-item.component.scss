@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+
+  .menu-item {
+    flex-grow: 1;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: gray;
+      color: white;
+    }
+
+    span {
+      margin: 0 0.5rem;
+    }
+  }
+}

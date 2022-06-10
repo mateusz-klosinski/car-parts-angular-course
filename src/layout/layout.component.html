@@ -1,8 +1,11 @@
-<cp-topbar></cp-topbar>
+<cp-topbar (sidebarSwitched)="onSidebarSwitched()"></cp-topbar>
 
 <div class="content-wrapper">
   <cp-content class="content"></cp-content>
-  <cp-sidebar></cp-sidebar>
+  <cp-sidebar
+    class="sidebar"
+    [ngClass]="{ hidden: !isSidebarVisible }"
+  ></cp-sidebar>
 </div>
 
 <cp-footer></cp-footer>

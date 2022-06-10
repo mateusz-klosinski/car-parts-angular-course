@@ -1,3 +1,13 @@
-<p>
-  topbar works!
-</p>
+<p-toolbar>
+  <div class="p-toolbar-group-left">
+    <p-button
+      label="Car Parts"
+      icon="pi pi-car"
+      styleClass="p-button-success"
+    ></p-button>
+  </div>
+
+  <div class="p-toolbar-group-right">
+    <p-button icon="pi pi-bars" (onClick)="onToolbarButtonClicked()"></p-button>
+  </div>
+</p-toolbar>
