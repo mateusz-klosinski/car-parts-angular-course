@@ -7,9 +7,10 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, PrimengModule],
+  imports: [CommonModule, PrimengModule, FormsModule],
   exports: [LayoutComponent, PrimengModule],
   declarations: [
     LayoutComponent,

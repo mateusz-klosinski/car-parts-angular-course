@@ -1,7 +1,26 @@
 :host {
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
+  gap: 2rem;
 
   .table {
     flex-grow: 1;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .part-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .form-buttons {
+      display: flex;
+      gap: 1rem;
+    }
   }
 }
