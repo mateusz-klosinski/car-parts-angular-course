@@ -56,7 +56,7 @@
       <label for="name">Name</label>
     </span>
     <p-message
-      *ngIf="form.controls['name']?.errors"
+      *ngIf="form.touched && form.controls['name']?.errors"
       severity="error"
       text="Name field is required"
     ></p-message>
@@ -75,7 +75,7 @@
 
     <div class="form-buttons">
       <p-button
-        [disabled]="form.invalid ?? false"
+        [disabled]="form?.invalid ?? false"
         type="submit"
         styleClass="p-button-success"
         label="Save"

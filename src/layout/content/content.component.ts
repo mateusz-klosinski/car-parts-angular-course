@@ -54,11 +54,13 @@ export class ContentComponent implements OnInit {
   onFormCancelled(): void {
     this.isAdding = false;
     this.isEditing = false;
+
+    this.id = null;
+    this.name = null;
+    this.price = null;
   }
 
   onFormSubmitted(): void {
-    console.log('### SUBMITTED');
-
     if (!this.name || !this.price) {
       throw new Error('Fields are not filled in');
     }
@@ -72,8 +74,12 @@ export class ContentComponent implements OnInit {
     this.items = this.items.filter((i) => i.id !== part.id);
 
     this.items.push(part);
+
+    this.id = null;
     this.name = null;
     this.price = null;
+
     this.isAdding = false;
+    this.isEditing = false;
   }
 }
