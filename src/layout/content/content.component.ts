@@ -1,3 +1,4 @@
+import { PartFormData } from './../../parts/shared/part-form-data.model';
 import { Part } from './../../parts/shared/part.model';
 import { Component, OnInit, Optional } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
@@ -60,15 +61,11 @@ export class ContentComponent implements OnInit {
     this.price = null;
   }
 
-  onFormSubmitted(): void {
-    if (!this.name || !this.price) {
-      throw new Error('Fields are not filled in');
-    }
-
+  onFormSubmitted(partFormData: PartFormData): void {
     var part: Part = {
       id: this.id ?? Math.random().toString(),
-      name: this.name,
-      price: this.price,
+      name: partFormData.name,
+      price: partFormData.price,
     };
 
     this.items = this.items.filter((i) => i.id !== part.id);

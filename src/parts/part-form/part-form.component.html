@@ -1,0 +1,45 @@
+<form class="part-form" #form="ngForm" (ngSubmit)="onFormSubmitted()">
+  <span class="p-float-label">
+    <input
+      required
+      id="name"
+      name="name"
+      type="text"
+      pInputText
+      [(ngModel)]="internalName"
+    />
+    <label for="name">Name</label>
+  </span>
+  <p-message
+    *ngIf="form.touched && form.controls['name']?.errors"
+    severity="error"
+    text="Name field is required"
+  ></p-message>
+
+  <span class="p-float-label">
+    <p-inputNumber
+      mode="decimal"
+      inputId="price"
+      name="price"
+      [useGrouping]="false"
+      [(ngModel)]="internalPrice"
+    >
+    </p-inputNumber>
+    <label for="price">Price</label>
+  </span>
+
+  <div class="form-buttons">
+    <p-button
+      [disabled]="form?.invalid ?? false"
+      type="submit"
+      styleClass="p-button-success"
+      label="Save"
+    ></p-button>
+    <p-button
+      type="button"
+      styleClass="p-button-danger"
+      label="Cancel"
+      (onClick)="onFormCancelled()"
+    ></p-button>
+  </div>
+</form>

@@ -1,3 +1,4 @@
+import { PartsModule } from './../parts/parts.module';
 import { PrimengModule } from './../primeng/primeng.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,10 +8,10 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
-import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  imports: [CommonModule, PrimengModule, FormsModule],
+  imports: [CommonModule, PrimengModule, PartsModule],
   exports: [LayoutComponent, PrimengModule],
   declarations: [
     LayoutComponent,
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     SidebarComponent,
     TopbarComponent,
     MenuItemComponent,
+    HeaderComponent,
   ],
 })
 export class LayoutModule {}

@@ -1,0 +1,7 @@
+<h2>{{ label }}</h2>
+<p-button
+  *ngIf="addButtonVisible"
+  icon="pi pi-plus"
+  styleClass="p-button-success"
+  (onClick)="addButtonClicked.emit()"
+></p-button>

@@ -1,91 +1,23 @@
 <ng-container *ngIf="!isAdding && !isEditing">
-  <div class="header">
-    <h2>Manage parts</h2>
-    <p-button
-      icon="pi pi-plus"
-      styleClass="p-button-success"
-      (onClick)="addPart()"
-    ></p-button>
-  </div>
+  <cp-header
+    label="Manage parts"
+    [addButtonVisible]="true"
+    (addButtonClicked)="addPart()"
+  ></cp-header>
 
-  <p-table class="table" [value]="items">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Actions</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-part>
-      <tr>
-        <td>{{ part.name }}</td>
-        <td>{{ part.price }}</td>
-        <td>
-          <div class="action-buttons">
-            <p-button
-              icon="pi pi-pencil"
-              styleClass="p-button-warning"
-              (onClick)="editPart(part)"
-            ></p-button>
-            <p-button
-              icon="pi pi-trash"
-              styleClass="p-button-danger"
-              (onClick)="deletePart(part)"
-            ></p-button>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+  <cp-parts-list
+    [parts]="items"
+    (editClicked)="editPart($event)"
+    (deleteClicked)="deletePart($event)"
+  ></cp-parts-list>
 </ng-container>
 
 <ng-container *ngIf="isAdding || isEditing">
-  <div class="header">
-    <h2>{{ isAdding ? "Add" : "Edit" }} part</h2>
-  </div>
-  <form class="part-form" #form="ngForm" (ngSubmit)="onFormSubmitted()">
-    <span class="p-float-label">
-      <input
-        required
-        id="name"
-        name="name"
-        type="text"
-        pInputText
-        [(ngModel)]="name"
-      />
-      <label for="name">Name</label>
-    </span>
-    <p-message
-      *ngIf="form.touched && form.controls['name']?.errors"
-      severity="error"
-      text="Name field is required"
-    ></p-message>
-
-    <span class="p-float-label">
-      <p-inputNumber
-        mode="decimal"
-        inputId="price"
-        name="price"
-        [useGrouping]="false"
-        [(ngModel)]="price"
-      >
-      </p-inputNumber>
-      <label for="price">Price</label>
-    </span>
-
-    <div class="form-buttons">
-      <p-button
-        [disabled]="form?.invalid ?? false"
-        type="submit"
-        styleClass="p-button-success"
-        label="Save"
-      ></p-button>
-      <p-button
-        type="button"
-        styleClass="p-button-danger"
-        label="Cancel"
-        (onClick)="onFormCancelled()"
-      ></p-button>
-    </div>
-  </form>
+  <cp-header [label]="(isAdding ? 'Add' : 'Edit') + ' part'"></cp-header>
+  <cp-part-form
+    [name]="name"
+    [price]="price"
+    (submitted)="onFormSubmitted($event)"
+    (cancelled)="onFormCancelled()"
+  ></cp-part-form>
 </ng-container>
