@@ -9,11 +9,13 @@
         pInputText
         formControlName="name"
       />
-      <label for="name">Name</label>
+      <label for="name">
+        {{ partFormControls.Name | cpPartFormControlLabel }}
+      </label>
     </span>
     <cp-form-control-errors
       *ngIf="partForm.controls[partFormControls.Name].touched"
-      controlLabel="Name"
+      [controlLabel]="partFormControls.Name | cpPartFormControlLabel"
       [controlErrors]="partForm.controls[partFormControls.Name].errors"
     ></cp-form-control-errors>
   </div>
@@ -28,11 +30,13 @@
         formControlName="price"
       >
       </p-inputNumber>
-      <label for="price">Price</label>
+      <label for="price">
+        {{ partFormControls.Price | cpPartFormControlLabel }}
+      </label>
     </span>
     <cp-form-control-errors
       *ngIf="partForm.controls[partFormControls.Price].touched"
-      controlLabel="Price"
+      [controlLabel]="partFormControls.Price | cpPartFormControlLabel"
       [controlErrors]="partForm.controls[partFormControls.Price].errors"
     ></cp-form-control-errors>
   </div>

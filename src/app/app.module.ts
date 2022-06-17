@@ -18,6 +18,11 @@ const routes: Routes = [
       import('../parts/parts.module').then((m) => m.PartsModule),
   },
   {
+    path: 'basket',
+    loadChildren: () =>
+      import('../basket/basket.module').then((m) => m.BasketModule),
+  },
+  {
     path: '*',
     redirectTo: 'parts',
   },

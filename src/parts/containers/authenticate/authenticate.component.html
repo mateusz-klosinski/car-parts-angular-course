@@ -1,0 +1,22 @@
+<cp-header label="Provide password to manage parts!"></cp-header>
+
+<input
+  pInputText
+  [(ngModel)]="password"
+  placeholder="Write password.."
+  type="password"
+/>
+
+<div class="action-buttons">
+  <p-button
+    styleClass="p-button-success"
+    label="Confirm"
+    [disabled]="!password"
+    (onClick)="authenticate()"
+  ></p-button>
+  <p-button
+    styleClass="p-button-danger"
+    label="Cancel"
+    (onClick)="cancel()"
+  ></p-button>
+</div>
