@@ -1,4 +1,4 @@
-<ng-container *ngIf="!isAdding && !isEditing">
+<ng-container *ngIf="!isAdding && !selectedPart">
   <cp-header
     label="Manage parts"
     [addButtonVisible]="true"
@@ -12,11 +12,10 @@
   ></cp-parts-list>
 </ng-container>
 
-<ng-container *ngIf="isAdding || isEditing">
+<ng-container *ngIf="isAdding || selectedPart">
   <cp-header [label]="(isAdding ? 'Add' : 'Edit') + ' part'"></cp-header>
   <cp-part-form
-    [name]="name"
-    [price]="price"
+    [part]="selectedPart"
     (submitted)="onFormSubmitted($event)"
     (cancelled)="onFormCancelled()"
   ></cp-part-form>

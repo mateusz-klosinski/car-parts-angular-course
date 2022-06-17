@@ -1,0 +1,5 @@
+<p-message
+  *ngFor="let message of controlErrors | cpControlErrorMessages: controlLabel"
+  severity="error"
+  [text]="message"
+></p-message>

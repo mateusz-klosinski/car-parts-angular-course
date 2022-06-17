@@ -1,36 +1,45 @@
-<form class="part-form" #form="ngForm" (ngSubmit)="onFormSubmitted()">
-  <span class="p-float-label">
-    <input
-      required
-      id="name"
-      name="name"
-      type="text"
-      pInputText
-      [(ngModel)]="internalName"
-    />
-    <label for="name">Name</label>
-  </span>
-  <p-message
-    *ngIf="form.touched && form.controls['name']?.errors"
-    severity="error"
-    text="Name field is required"
-  ></p-message>
+<form class="part-form" [formGroup]="partForm" (ngSubmit)="onFormSubmitted()">
+  <div class="form-control">
+    <span class="p-float-label">
+      <input
+        required
+        id="name"
+        name="name"
+        type="text"
+        pInputText
+        formControlName="name"
+      />
+      <label for="name">Name</label>
+    </span>
+    <cp-form-control-errors
+      *ngIf="partForm.controls['name'].touched"
+      controlLabel="Name"
+      [controlErrors]="partForm.controls['name'].errors"
+    ></cp-form-control-errors>
+  </div>
 
-  <span class="p-float-label">
-    <p-inputNumber
-      mode="decimal"
-      inputId="price"
-      name="price"
-      [useGrouping]="false"
-      [(ngModel)]="internalPrice"
-    >
-    </p-inputNumber>
-    <label for="price">Price</label>
-  </span>
+  <div class="form-control">
+    <span class="p-float-label">
+      <p-inputNumber
+        mode="decimal"
+        inputId="price"
+        name="price"
+        [useGrouping]="false"
+        formControlName="price"
+      >
+      </p-inputNumber>
+      <label for="price">Price</label>
+    </span>
+    <cp-form-control-errors
+      *ngIf="partForm.controls['price'].touched"
+      controlLabel="Price"
+      [controlErrors]="partForm.controls['price'].errors"
+    ></cp-form-control-errors>
+  </div>
 
   <div class="form-buttons">
     <p-button
-      [disabled]="form?.invalid ?? false"
+      [disabled]="partForm?.invalid ?? false"
       type="submit"
       styleClass="p-button-success"
       label="Save"

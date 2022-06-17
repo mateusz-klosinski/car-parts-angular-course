@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { PartFormData } from '../shared/part-form-data.model';
+import { Part } from '../shared/part.model';
 
 @Component({
   selector: 'cp-part-form',
@@ -7,28 +9,29 @@ import { PartFormData } from '../shared/part-form-data.model';
   styleUrls: ['./part-form.component.scss'],
 })
 export class PartFormComponent implements OnInit {
-  @Input() name: string | null = null;
-  @Input() price: number | null = null;
+  @Input() set part(value: Part | null) {
+    if (value) {
+      this.partForm.patchValue(value);
+    } else {
+      this.partForm.reset();
+    }
+  }
 
   @Output() readonly submitted = new EventEmitter<PartFormData>();
   @Output() readonly cancelled = new EventEmitter<void>();
 
-  internalName: string | null = null;
-  internalPrice: number | null = null;
+  readonly partForm = this.formBuilder.group({
+    name: [null, [Validators.required]],
+    price: [null, [Validators.required, Validators.min(1)]],
+  });
 
-  constructor() {}
+  constructor(private readonly formBuilder: UntypedFormBuilder) {}
 
-  ngOnInit() {
-    this.internalName = this.name;
-    this.internalPrice = this.price;
-  }
+  ngOnInit() {}
 
   onFormSubmitted(): void {
-    if (!this.internalName || !this.internalPrice) {
-      throw new Error('Fields must be filled!');
-    }
-
-    this.submitted.emit({ name: this.internalName, price: this.internalPrice });
+    const partData = this.partForm.getRawValue() as PartFormData;
+    this.submitted.emit(partData);
   }
 
   onFormCancelled(): void {

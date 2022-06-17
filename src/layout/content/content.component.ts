@@ -10,7 +10,6 @@ import { ConfirmationService } from 'primeng/api';
 })
 export class ContentComponent implements OnInit {
   isAdding = false;
-  isEditing = false;
 
   items: Part[] = [
     {
@@ -25,9 +24,7 @@ export class ContentComponent implements OnInit {
     },
   ];
 
-  id: string | null = null;
-  name: string | null = null;
-  price: number | null = null;
+  selectedPart: Part | null = null;
 
   constructor(private readonly confirmationService: ConfirmationService) {}
 
@@ -46,37 +43,26 @@ export class ContentComponent implements OnInit {
   }
 
   editPart(part: Part): void {
-    this.isEditing = true;
-    this.id = part.id;
-    this.name = part.name;
-    this.price = part.price;
+    this.selectedPart = part;
   }
 
   onFormCancelled(): void {
     this.isAdding = false;
-    this.isEditing = false;
-
-    this.id = null;
-    this.name = null;
-    this.price = null;
+    this.selectedPart = null;
   }
 
   onFormSubmitted(partFormData: PartFormData): void {
     var part: Part = {
-      id: this.id ?? Math.random().toString(),
+      id: this.selectedPart?.id ?? Math.random().toString(),
       name: partFormData.name,
       price: partFormData.price,
     };
 
     this.items = this.items.filter((i) => i.id !== part.id);
-
     this.items.push(part);
 
-    this.id = null;
-    this.name = null;
-    this.price = null;
+    this.selectedPart = null;
 
     this.isAdding = false;
-    this.isEditing = false;
   }
 }
