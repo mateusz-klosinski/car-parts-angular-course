@@ -1,21 +1,22 @@
-import { FormControlErrorsComponent } from './form-control-errors/form-control-errors.component';
-import { PartsListComponent } from './parts-list/parts-list.component';
-import { PrimengModule } from './../primeng/primeng.module';
+import { LayoutModule } from 'src/layout/layout.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PartFormComponent } from './part-form/part-form.component';
-import { ControlErrorMessagesPipe } from './shared/control-error-messages.pipe';
+import { PartsListComponent } from './components/parts-list/parts-list.component';
+import { PartFormComponent } from './components/part-form/part-form.component';
+import { ManagePartsComponent } from './containers/manage-parts/manage-parts.component';
+import { EditPartComponent } from './containers/edit-part/edit-part.component';
+import { AddPartComponent } from './containers/add-part/add-part.component';
 
-const publicComponents: Type<any>[] = [PartFormComponent, PartsListComponent];
+const publicComponents: Type<any>[] = [
+  ManagePartsComponent,
+  EditPartComponent,
+  AddPartComponent,
+];
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, PrimengModule],
-  declarations: [
-    ...publicComponents,
-    FormControlErrorsComponent,
-    ControlErrorMessagesPipe,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, LayoutModule],
+  declarations: [...publicComponents, PartFormComponent, PartsListComponent],
   exports: [...publicComponents],
 })
 export class PartsModule {}

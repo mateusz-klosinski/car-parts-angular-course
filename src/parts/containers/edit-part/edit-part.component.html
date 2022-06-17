@@ -1,0 +1,7 @@
+<cp-header [label]="'Edit part: ' + part?.name"></cp-header>
+
+<cp-part-form
+  [part]="part"
+  (submitted)="onFormSubmit($event)"
+  (cancelled)="onFormCancel()"
+></cp-part-form>

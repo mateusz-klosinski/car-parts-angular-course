@@ -1,0 +1,11 @@
+<cp-header
+  label="Manage parts"
+  [addButtonVisible]="true"
+  (addButtonClicked)="addPart()"
+></cp-header>
+
+<cp-parts-list
+  [parts]="items"
+  (editClicked)="editPart($event)"
+  (deleteClicked)="deletePart($event)"
+></cp-parts-list>

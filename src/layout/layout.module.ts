@@ -1,6 +1,5 @@
-import { PartsModule } from './../parts/parts.module';
 import { PrimengModule } from './../primeng/primeng.module';
-import { NgModule } from '@angular/core';
+import { NgModule, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout.component';
 import { ContentComponent } from './content/content.component';
@@ -9,18 +8,26 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { HeaderComponent } from './header/header.component';
+import { FormControlErrorsComponent } from './form-control-errors/form-control-errors.component';
+import { ControlErrorMessagesPipe } from './shared/control-error-messages.pipe';
+
+const publicApi: Type<any>[] = [
+  HeaderComponent,
+  LayoutComponent,
+  FormControlErrorsComponent,
+  ControlErrorMessagesPipe,
+];
 
 @NgModule({
-  imports: [CommonModule, PrimengModule, PartsModule],
-  exports: [LayoutComponent, PrimengModule],
+  imports: [CommonModule, PrimengModule],
+  exports: [PrimengModule, ...publicApi],
   declarations: [
-    LayoutComponent,
+    ...publicApi,
     ContentComponent,
     FooterComponent,
     SidebarComponent,
     TopbarComponent,
     MenuItemComponent,
-    HeaderComponent,
   ],
 })
 export class LayoutModule {}

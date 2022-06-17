@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Part } from '../shared/part.model';
+import { Part } from '../../shared/part.model';
 
 @Component({
   selector: 'cp-parts-list',

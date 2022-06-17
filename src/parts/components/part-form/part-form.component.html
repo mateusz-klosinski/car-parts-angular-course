@@ -12,9 +12,9 @@
       <label for="name">Name</label>
     </span>
     <cp-form-control-errors
-      *ngIf="partForm.controls['name'].touched"
+      *ngIf="partForm.controls[partFormControls.Name].touched"
       controlLabel="Name"
-      [controlErrors]="partForm.controls['name'].errors"
+      [controlErrors]="partForm.controls[partFormControls.Name].errors"
     ></cp-form-control-errors>
   </div>
 
@@ -31,9 +31,9 @@
       <label for="price">Price</label>
     </span>
     <cp-form-control-errors
-      *ngIf="partForm.controls['price'].touched"
+      *ngIf="partForm.controls[partFormControls.Price].touched"
       controlLabel="Price"
-      [controlErrors]="partForm.controls['price'].errors"
+      [controlErrors]="partForm.controls[partFormControls.Price].errors"
     ></cp-form-control-errors>
   </div>
 

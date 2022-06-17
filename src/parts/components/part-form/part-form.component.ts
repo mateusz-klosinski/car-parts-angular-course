@@ -1,7 +1,8 @@
+import { PartFormControls } from '../../shared/part-form-controls.enum';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { PartFormData } from '../shared/part-form-data.model';
-import { Part } from '../shared/part.model';
+import { PartFormData } from '../../shared/part-form-data.model';
+import { Part } from '../../shared/part.model';
 
 @Component({
   selector: 'cp-part-form',
@@ -20,9 +21,11 @@ export class PartFormComponent implements OnInit {
   @Output() readonly submitted = new EventEmitter<PartFormData>();
   @Output() readonly cancelled = new EventEmitter<void>();
 
+  readonly partFormControls = PartFormControls;
+
   readonly partForm = this.formBuilder.group({
-    name: [null, [Validators.required]],
-    price: [null, [Validators.required, Validators.min(1)]],
+    [PartFormControls.Name]: [null, [Validators.required]],
+    [PartFormControls.Price]: [null, [Validators.required, Validators.min(1)]],
   });
 
   constructor(private readonly formBuilder: UntypedFormBuilder) {}
