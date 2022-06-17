@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PartsListMode } from 'src/parts/shared/parts-list-mode.enum';
 import { Part } from '../../shared/part.model';
 
 @Component({
@@ -8,9 +9,12 @@ import { Part } from '../../shared/part.model';
 })
 export class PartsListComponent implements OnInit {
   @Input() parts: Part[] = [];
+  @Input() mode: PartsListMode = PartsListMode.Buy;
 
   @Output() readonly editClicked = new EventEmitter<Part>();
   @Output() readonly deleteClicked = new EventEmitter<Part>();
+
+  readonly partsListMode = PartsListMode;
 
   constructor() {}
 
@@ -23,4 +27,6 @@ export class PartsListComponent implements OnInit {
   onDeleteClicked(part: Part): void {
     this.deleteClicked.emit(part);
   }
+
+  onAddToBasketClicked(part: Part): void {}
 }

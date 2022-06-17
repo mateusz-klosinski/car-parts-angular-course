@@ -5,6 +5,7 @@
 ></cp-header>
 
 <cp-parts-list
+  [mode]="partsListMode.Manage"
   [parts]="items"
   (editClicked)="editPart($event)"
   (deleteClicked)="deletePart($event)"

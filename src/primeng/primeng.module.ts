@@ -26,6 +26,5 @@ const primengModules: Type<any>[] = [
 @NgModule({
   imports: [CommonModule, ...primengModules],
   exports: [...primengModules],
-  providers: [ConfirmationService],
 })
 export class PrimengModule {}

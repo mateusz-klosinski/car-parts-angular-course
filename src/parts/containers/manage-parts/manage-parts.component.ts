@@ -1,7 +1,8 @@
+import { PartsListMode } from './../../shared/parts-list-mode.enum';
+import { PartsService } from './../../shared/parts.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { PartFormData } from '../../shared/part-form-data.model';
 import { Part } from '../../shared/part.model';
 
 @Component({
@@ -10,31 +11,25 @@ import { Part } from '../../shared/part.model';
   styleUrls: ['./manage-parts.component.scss'],
 })
 export class ManagePartsComponent implements OnInit {
-  items: Part[] = [
-    {
-      id: '1',
-      name: 'head gasket',
-      price: 110,
-    },
-    {
-      id: '2',
-      name: 'spark plug',
-      price: 70,
-    },
-  ];
+  readonly partsListMode = PartsListMode;
+
+  items: Part[] = [];
 
   constructor(
     private readonly confirmationService: ConfirmationService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly partsService: PartsService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.items = this.partsService.getParts();
+  }
 
   deletePart(part: Part): void {
     this.confirmationService.confirm({
       header: 'Delete confirmation',
       message: 'Do you really want to delete part?',
-      accept: () => (this.items = this.items.filter((i) => i.id !== part.id)),
+      accept: () => this.partsService.deletePart(part.id),
     });
   }
 

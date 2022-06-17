@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MenuItemComponent implements OnInit {
   @Input() label = '';
   @Input() icon = 'pi pi-cog';
+  @Input() link?: string;
 
   constructor() {}
 

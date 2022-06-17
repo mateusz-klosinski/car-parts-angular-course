@@ -12,16 +12,27 @@
       <td>{{ part.price }}</td>
       <td>
         <div class="action-buttons">
-          <p-button
-            icon="pi pi-pencil"
-            styleClass="p-button-warning"
-            (onClick)="onEditClicked(part)"
-          ></p-button>
-          <p-button
-            icon="pi pi-trash"
-            styleClass="p-button-danger"
-            (onClick)="onDeleteClicked(part)"
-          ></p-button>
+          <ng-container [ngSwitch]="mode">
+            <ng-container *ngSwitchCase="partsListMode.Buy">
+              <p-button
+                icon="pi pi-shopping-cart"
+                styleClass="p-button-info"
+                (onClick)="onAddToBasketClicked(part)"
+              ></p-button>
+            </ng-container>
+            <ng-container *ngSwitchCase="partsListMode.Manage">
+              <p-button
+                icon="pi pi-pencil"
+                styleClass="p-button-warning"
+                (onClick)="onEditClicked(part)"
+              ></p-button>
+              <p-button
+                icon="pi pi-trash"
+                styleClass="p-button-danger"
+                (onClick)="onDeleteClicked(part)"
+              ></p-button>
+            </ng-container>
+          </ng-container>
         </div>
       </td>
     </tr>

@@ -1,7 +1,4 @@
-import { EditPartComponent } from './../parts/containers/edit-part/edit-part.component';
-import { AddPartComponent } from './../parts/containers/add-part/add-part.component';
-import { ManagePartsComponent } from '../parts/containers/manage-parts/manage-parts.component';
-import { PartsModule } from './../parts/parts.module';
+import { ConfirmationService } from 'primeng/api';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LayoutModule } from 'src/layout/layout.module';
@@ -13,19 +10,12 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'parts',
+    redirectTo: 'parts/buy',
   },
   {
     path: 'parts',
-    component: ManagePartsComponent,
-  },
-  {
-    path: 'parts/add',
-    component: AddPartComponent,
-  },
-  {
-    path: 'parts/edit/:id',
-    component: EditPartComponent,
+    loadChildren: () =>
+      import('../parts/parts.module').then((m) => m.PartsModule),
   },
   {
     path: '*',
@@ -38,11 +28,10 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     LayoutModule,
-    PartsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [],
+  providers: [ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

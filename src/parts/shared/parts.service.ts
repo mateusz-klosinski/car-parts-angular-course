@@ -4,7 +4,7 @@ import { Part } from './part.model';
 
 @Injectable()
 export class PartsService {
-  readonly parts: Part[] = [
+  private readonly parts: Part[] = [
     {
       id: '1',
       name: 'head gasket',
@@ -21,9 +21,36 @@ export class PartsService {
     return this.parts;
   }
 
-  addPart(data: PartFormData): void {}
+  getPart(id: string): Part | null {
+    return this.parts.find((p) => p.id === id) ?? null;
+  }
 
-  updatePart(id: string, data: PartFormData): void {}
+  addPart(data: PartFormData): void {
+    this.parts.push({
+      id: Math.random().toString(),
+      name: data.name,
+      price: data.price,
+    });
+  }
 
-  deletePart(id: string): void {}
+  updatePart(id: string, data: PartFormData): void {
+    const part = this.parts.find((p) => p.id === id);
+
+    if (!part) {
+      throw new Error(`Part with id: ${id} does not exist!`);
+    }
+
+    part.name = data.name;
+    part.price = data.price;
+  }
+
+  deletePart(id: string): void {
+    const index = this.parts.findIndex((p) => p.id === id);
+
+    if (index < 0) {
+      throw new Error(`Part with id ${id} does not exist!`);
+    }
+
+    this.parts.splice(index, 1);
+  }
 }
