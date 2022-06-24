@@ -1,7 +1,7 @@
-<cp-header label="Basket"></cp-header>
-
 <ng-container *ngIf="{ basket: basket$ | async } as data">
-  <ng-container *ngIf="data.basket">
+  <ng-container *ngIf="data.basket && !isProcessingPayment">
+    <cp-header label="Basket"></cp-header>
+
     <cp-basket-entry-list
       [entries]="data.basket.entries"
       (amountChanged)="onEntryAmountChanged($event)"
@@ -11,11 +11,30 @@
       [totalCount]="data.basket.totalCount"
       [price]="data.basket.price"
     ></cp-basket-summary>
+
+    <div class="action-buttons">
+      <p-button
+        styleClass="p-button-success"
+        label="Confirm"
+        [disabled]="data.basket.isEmpty"
+        (onClick)="confirmBasket()"
+      ></p-button>
+      <p-button
+        styleClass="p-button-warning"
+        label="Clear"
+        [disabled]="data.basket.isEmpty"
+        (onClick)="clearBasket()"
+      ></p-button>
+      <p-button
+        styleClass="p-button-danger"
+        label="Cancel"
+        (onClick)="goBackToParts()"
+      ></p-button>
+    </div>
   </ng-container>
 </ng-container>
 
-<div class="action-buttons">
-  <p-button styleClass="p-button-success" label="Confirm"></p-button>
-  <p-button styleClass="p-button-warning" label="Clear"></p-button>
-  <p-button styleClass="p-button-danger" label="Cancel"></p-button>
+<div class="payment-loader" *ngIf="isProcessingPayment">
+  <p-progressSpinner></p-progressSpinner>
+  <p>Processing payment...</p>
 </div>

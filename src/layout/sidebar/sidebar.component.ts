@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { MenuBadgeService } from 'src/layout/shared/menu-badge.service';
+import { Component, OnInit, Optional } from '@angular/core';
 
 @Component({
   selector: 'cp-sidebar',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-  constructor() {}
+  totalCount$ = this.menuBadgeService?.getBadgeFor('Basket');
+
+  constructor(
+    @Optional() private readonly menuBadgeService: MenuBadgeService | null
+  ) {}
 
   ngOnInit() {}
 }

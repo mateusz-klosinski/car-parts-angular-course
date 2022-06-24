@@ -5,11 +5,12 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { BadgeModule } from 'primeng/badge';
 
 const primengModules: Type<any>[] = [
   ToolbarModule,
@@ -21,6 +22,8 @@ const primengModules: Type<any>[] = [
   InputNumberModule,
   MessagesModule,
   MessageModule,
+  ProgressSpinnerModule,
+  BadgeModule,
 ];
 
 @NgModule({

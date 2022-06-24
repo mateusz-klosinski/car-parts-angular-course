@@ -1,4 +1,5 @@
 <a class="menu-item" [routerLink]="[link]" [routerLinkActive]="'active-link'">
-  <i [class]="icon"></i>
+  <i *ngIf="!badge" [class]="icon"></i>
+  <i *ngIf="badge" [class]="icon" pBadge severity="warning" [value]="badge"></i>
   <span>{{ label }}</span>
 </a>

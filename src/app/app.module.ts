@@ -1,3 +1,5 @@
+import { BasketService } from './../basket/shared/basket.service';
+import { MenuBadgeService } from 'src/layout/shared/menu-badge.service';
 import { ConfirmationService } from 'primeng/api';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,7 +38,10 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [ConfirmationService],
+  providers: [
+    ConfirmationService,
+    { provide: MenuBadgeService, useExisting: BasketService },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

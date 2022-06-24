@@ -9,6 +9,7 @@ export class MenuItemComponent implements OnInit {
   @Input() label = '';
   @Input() icon = 'pi pi-cog';
   @Input() link?: string;
+  @Input() badge: string | null = null;
 
   constructor() {}
 

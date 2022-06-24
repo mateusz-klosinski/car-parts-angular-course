@@ -13,6 +13,7 @@ export class PartsListComponent implements OnInit {
 
   @Output() readonly editClicked = new EventEmitter<Part>();
   @Output() readonly deleteClicked = new EventEmitter<Part>();
+  @Output() readonly addToBasketClicked = new EventEmitter<Part>();
 
   readonly partsListMode = PartsListMode;
 
@@ -28,5 +29,7 @@ export class PartsListComponent implements OnInit {
     this.deleteClicked.emit(part);
   }
 
-  onAddToBasketClicked(part: Part): void {}
+  onAddToBasketClicked(part: Part): void {
+    this.addToBasketClicked.emit(part);
+  }
 }

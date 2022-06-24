@@ -14,8 +14,11 @@ export class BasketEntry {
 export class Basket {
   readonly totalCount: number;
   readonly price: number;
+  readonly isEmpty: boolean;
 
   constructor(readonly entries: BasketEntry[]) {
+    this.isEmpty = this.entries.length === 0;
+
     this.totalCount = entries
       .map((e) => e.amount)
       .reduce((prev, current) => prev + current, 0);
@@ -26,6 +29,12 @@ export class Basket {
   }
 
   addPart(part: Part): Basket {
+    const existingEntry = this.entries.find((e) => e.part.id === part.id);
+
+    if (existingEntry) {
+      return this.changeAmount(part.id, existingEntry.amount + 1);
+    }
+
     const entry = new BasketEntry(part, 1);
     const entries = [...this.entries, entry];
 

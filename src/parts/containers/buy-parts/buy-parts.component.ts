@@ -1,3 +1,4 @@
+import { BasketService } from './../../../basket/shared/basket.service';
 import { PartsService } from './../../shared/parts.service';
 import { Part } from './../../shared/part.model';
 import { Component, OnInit } from '@angular/core';
@@ -10,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 export class BuyPartsComponent implements OnInit {
   parts: Part[] = [];
 
-  constructor(private readonly partsService: PartsService) {}
+  constructor(
+    private readonly partsService: PartsService,
+    private readonly basketService: BasketService
+  ) {}
 
   ngOnInit() {
     this.parts = this.partsService.getParts();
+  }
+
+  onAddToBasketClicked(part: Part): void {
+    this.basketService.addPart(part);
   }
 }
