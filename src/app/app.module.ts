@@ -23,7 +23,7 @@ const routes: Routes = [
       import('../basket/basket.module').then((m) => m.BasketModule),
   },
   {
-    path: '*',
+    path: '**',
     redirectTo: 'parts',
   },
 ];
