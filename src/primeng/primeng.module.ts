@@ -11,6 +11,9 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BadgeModule } from 'primeng/badge';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { DialogModule } from 'primeng/dialog';
 
 const primengModules: Type<any>[] = [
   ToolbarModule,
@@ -24,6 +27,9 @@ const primengModules: Type<any>[] = [
   MessageModule,
   ProgressSpinnerModule,
   BadgeModule,
+  OverlayPanelModule,
+  InputTextareaModule,
+  DialogModule,
 ];
 
 @NgModule({

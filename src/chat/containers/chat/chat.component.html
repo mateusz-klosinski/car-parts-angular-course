@@ -1,0 +1,32 @@
+<p-button
+  class="chat-button"
+  styleClass="p-button-rounded p-button-success"
+  icon="pi pi-comments"
+  (onClick)="toggleChat($event)"
+></p-button>
+
+<p-overlayPanel
+  [dismissable]="false"
+  [showCloseIcon]="true"
+  (onShow)="chatShown()"
+  (onHide)="chatHide()"
+>
+  <div class="chat-content">
+    <cp-chat-messages
+      [messages]="messages"
+      [currentUser]="username"
+    ></cp-chat-messages>
+    <cp-chat-input (sendMessageClicked)="sendMessage($event)"></cp-chat-input>
+  </div>
+</p-overlayPanel>
+
+<p-dialog header="Provide name for chat!" [(visible)]="isUsernameDialogVisible">
+  <input pInputText [(ngModel)]="username" placeholder="Write your name..." />
+  <button
+    pButton
+    [disabled]="!username"
+    label="Confirm"
+    icon="pi pi-check"
+    (click)="confirmUsername()"
+  ></button>
+</p-dialog>

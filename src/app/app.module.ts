@@ -1,3 +1,4 @@
+import { ChatModule } from './../chat/chat.module';
 import { BasketService } from './../basket/shared/basket.service';
 import { MenuBadgeService } from 'src/layout/shared/menu-badge.service';
 import { ConfirmationService } from 'primeng/api';
@@ -39,6 +40,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
+    ChatModule,
   ],
   providers: [
     ConfirmationService,

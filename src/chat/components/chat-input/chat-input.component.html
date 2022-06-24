@@ -1,0 +1,6 @@
+<textarea pInputTextarea [(ngModel)]="message"></textarea>
+<p-button
+  icon="pi pi-send"
+  [disabled]="!message"
+  (onClick)="onSendMessageClicked()"
+></p-button>

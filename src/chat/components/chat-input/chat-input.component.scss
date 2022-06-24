@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(240, 240, 240);
+
+  textarea {
+    resize: none;
+    flex-grow: 1;
+  }
+}

@@ -1,0 +1,13 @@
+<ng-container *ngFor="let message of messages">
+  <cp-chat-message
+    *ngIf="message.type === chatMessageType.Default"
+    [name]="message.name"
+    [content]="message.content"
+    [isFromCurrentUser]="currentUser === message.name"
+  ></cp-chat-message>
+  <cp-chat-info-message
+    *ngIf="message.type !== chatMessageType.Default"
+    [name]="message.name"
+    [isLeaving]="message.type === chatMessageType.Leave"
+  ></cp-chat-info-message>
+</ng-container>
