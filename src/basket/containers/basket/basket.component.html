@@ -1,3 +1,21 @@
-<p>
-  basket works!
-</p>
+<cp-header label="Basket"></cp-header>
+
+<ng-container *ngIf="{ basket: basket$ | async } as data">
+  <ng-container *ngIf="data.basket">
+    <cp-basket-entry-list
+      [entries]="data.basket.entries"
+      (amountChanged)="onEntryAmountChanged($event)"
+      (deleteClicked)="onEntryDeleteClicked($event)"
+    ></cp-basket-entry-list>
+    <cp-basket-summary
+      [totalCount]="data.basket.totalCount"
+      [price]="data.basket.price"
+    ></cp-basket-summary>
+  </ng-container>
+</ng-container>
+
+<div class="action-buttons">
+  <p-button styleClass="p-button-success" label="Confirm"></p-button>
+  <p-button styleClass="p-button-warning" label="Clear"></p-button>
+  <p-button styleClass="p-button-danger" label="Cancel"></p-button>
+</div>

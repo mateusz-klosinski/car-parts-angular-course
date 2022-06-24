@@ -7,7 +7,7 @@
         name="name"
         type="text"
         pInputText
-        formControlName="name"
+        [formControlName]="partFormControls.Name"
       />
       <label for="name">
         {{ partFormControls.Name | cpPartFormControlLabel }}
@@ -27,7 +27,7 @@
         inputId="price"
         name="price"
         [useGrouping]="false"
-        formControlName="price"
+        [formControlName]="partFormControls.Price"
       >
       </p-inputNumber>
       <label for="price">
