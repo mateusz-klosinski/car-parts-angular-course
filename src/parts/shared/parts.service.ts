@@ -1,56 +1,36 @@
 import { PartFormData } from './part-form-data.model';
 import { Injectable } from '@angular/core';
 import { Part } from './part.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class PartsService {
-  private readonly parts: Part[] = [
-    {
-      id: '1',
-      name: 'head gasket',
-      price: 110,
-    },
-    {
-      id: '2',
-      name: 'spark plug',
-      price: 70,
-    },
-  ];
+  private readonly baseUrl = environment.baseUrl + 'part';
 
-  getParts(): Part[] {
-    return this.parts;
+  constructor(private readonly http: HttpClient) {}
+
+  getParts(): Observable<Part[]> {
+    return this.http.get<Part[]>(this.baseUrl);
   }
 
-  getPart(id: string): Part | null {
-    return this.parts.find((p) => p.id === id) ?? null;
+  getPart(id: string): Observable<Part> {
+    const url = this.baseUrl + `/${id}`;
+    return this.http.get<Part>(url);
   }
 
-  addPart(data: PartFormData): void {
-    this.parts.push({
-      id: Math.random().toString(),
-      name: data.name,
-      price: data.price,
-    });
+  addPart(data: PartFormData): Observable<Part> {
+    return this.http.post<Part>(this.baseUrl, data);
   }
 
-  updatePart(id: string, data: PartFormData): void {
-    const part = this.parts.find((p) => p.id === id);
-
-    if (!part) {
-      throw new Error(`Part with id: ${id} does not exist!`);
-    }
-
-    part.name = data.name;
-    part.price = data.price;
+  updatePart(id: string, data: PartFormData): Observable<Part> {
+    const url = this.baseUrl + `/${id}`;
+    return this.http.put<Part>(url, data);
   }
 
-  deletePart(id: string): void {
-    const index = this.parts.findIndex((p) => p.id === id);
-
-    if (index < 0) {
-      throw new Error(`Part with id ${id} does not exist!`);
-    }
-
-    this.parts.splice(index, 1);
+  deletePart(id: string): Observable<string> {
+    const url = this.baseUrl + `/${id}`;
+    return this.http.delete<string>(url);
   }
 }

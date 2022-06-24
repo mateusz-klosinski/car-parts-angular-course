@@ -1,6 +1,6 @@
 import { PartsListMode } from './../../shared/parts-list-mode.enum';
 import { PartsService } from './../../shared/parts.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { Part } from '../../shared/part.model';
@@ -10,10 +10,10 @@ import { Part } from '../../shared/part.model';
   templateUrl: './manage-parts.component.html',
   styleUrls: ['./manage-parts.component.scss'],
 })
-export class ManagePartsComponent implements OnInit {
+export class ManagePartsComponent {
   readonly partsListMode = PartsListMode;
 
-  items: Part[] = [];
+  parts$ = this.partsService.getParts();
 
   constructor(
     private readonly confirmationService: ConfirmationService,
@@ -21,15 +21,14 @@ export class ManagePartsComponent implements OnInit {
     private readonly partsService: PartsService
   ) {}
 
-  ngOnInit(): void {
-    this.items = this.partsService.getParts();
-  }
-
   deletePart(part: Part): void {
     this.confirmationService.confirm({
       header: 'Delete confirmation',
       message: 'Do you really want to delete part?',
-      accept: () => this.partsService.deletePart(part.id),
+      accept: () =>
+        this.partsService
+          .deletePart(part.id)
+          .subscribe(() => (this.parts$ = this.partsService.getParts())),
     });
   }
 

@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./basket.component.scss'],
 })
 export class BasketComponent {
-  basket$: Observable<Basket> = this.basketService.getBasket();
+  basket$: Observable<Basket | null> = this.basketService.getBasket();
   isProcessingPayment = false;
 
   constructor(

@@ -17,8 +17,9 @@ export class AddPartComponent implements OnInit {
   ngOnInit() {}
 
   onFormSubmit(data: PartFormData): void {
-    this.partsService.addPart(data);
-    this.goBackToList();
+    this.partsService.addPart(data).subscribe(() => {
+      this.goBackToList();
+    });
   }
 
   goBackToList(): void {

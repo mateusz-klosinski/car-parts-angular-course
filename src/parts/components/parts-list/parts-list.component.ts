@@ -8,7 +8,7 @@ import { Part } from '../../shared/part.model';
   styleUrls: ['./parts-list.component.scss'],
 })
 export class PartsListComponent implements OnInit {
-  @Input() parts: Part[] = [];
+  @Input() parts: Part[] | null = null;
   @Input() mode: PartsListMode = PartsListMode.Buy;
 
   @Output() readonly editClicked = new EventEmitter<Part>();

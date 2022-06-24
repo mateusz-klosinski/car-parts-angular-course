@@ -6,7 +6,7 @@
 
 <cp-parts-list
   [mode]="partsListMode.Manage"
-  [parts]="items"
+  [parts]="parts$ | async"
   (editClicked)="editPart($event)"
   (deleteClicked)="deletePart($event)"
 ></cp-parts-list>

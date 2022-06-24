@@ -1,6 +1,6 @@
 <cp-header label="Buy parts"></cp-header>
 
 <cp-parts-list
-  [parts]="parts"
+  [parts]="parts$ | async"
   (addToBasketClicked)="onAddToBasketClicked($event)"
 ></cp-parts-list>

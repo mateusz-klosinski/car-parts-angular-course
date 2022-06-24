@@ -4,7 +4,7 @@ import { Part } from './../../shared/part.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'cp-edit-part',
@@ -27,9 +27,10 @@ export class EditPartComponent implements OnInit, OnDestroy {
       .pipe(
         filter((params) => params['id']),
         map((params) => params['id']),
+        switchMap((id) => this.partsService.getPart(id)),
         takeUntil(this.unsubscribe)
       )
-      .subscribe((id) => (this.part = this.partsService.getPart(id)));
+      .subscribe((part) => (this.part = part));
   }
 
   onFormSubmit(data: PartFormData): void {
@@ -37,8 +38,9 @@ export class EditPartComponent implements OnInit, OnDestroy {
       throw new Error('Can not submit form, part is not assigned!');
     }
 
-    this.partsService.updatePart(this.part.id, data);
-    this.goBackToList();
+    this.partsService.updatePart(this.part.id, data).subscribe(() => {
+      this.goBackToList();
+    });
   }
 
   goBackToList(): void {
